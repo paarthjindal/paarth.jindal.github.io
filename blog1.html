@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('background1.jpeg');
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: #ddd;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .blog {
+            
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .blog:hover {
+            transform: scale(1.02);
+        }
+
+        .interaction-container {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .design{
+            transition: 0.5s ease;
+            opacity: 0;
+            animation: slideLeft 1s ease forwards;
+            animation-delay: 0.6s;
+        }
+        button:hover {
+            background-color: #297fb8;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        header h1{
+            opacity: 0;
+            animation: slideTop 0.5s ease forwards;
+            animation-delay: 0.2s;
+
+        }
+        @media only screen and (max-width: 600px) {
+            /* Adjust styling for smaller screens */
+            .blog {
+                padding: 10px;
+            }
+
+            button {
+                padding: 6px 10px;
+            }
+        }
+
+        .comments div {
+            
+            padding: 8px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+        }
+        @keyframes slideRight {
+            0% {
+              transform: translateX(-100px);
+              opacity: 0;
+            }
+            100% {
+              transform: translateX(0px);
+              opacity: 1;
+            }
+          }
+          
+          @keyframes slideTop {
+            0% {
+              transform: translateY(100px);
+              opacity: 0;
+            }
+            100% {
+              transform: translateY(0px);
+              opacity: 1;
+            }
+          }
+          
+          @keyframes slideBottom {
+            0% {
+              transform: translateY(-100px);
+              opacity: 0;
+            }
+            100% {
+              transform: translateY(0px);
+              opacity: 1;
+            }
+          }
+          
+          @keyframes slideLeft {
+            0% {
+              transform: translateX(100px);
+              opacity: 0;
+            }
+            100% {
+              transform: translateX(0px);
+              opacity: 1;
+            }
+          }
+    </style>
+    <title>Blog Section 1</title>
+    <script>
+        // Function to handle like button click
+        function likeBlog(blogId) {
+            let likeCount = localStorage.getItem(`likeCount_${blogId}`);
+        
+            console.log(`Current likeCount_${blogId} in local storage: ${likeCount}`);
+        
+            
+            if (likeCount === null || isNaN(likeCount)) {
+               
+                likeCount = 0;
+            } else {
+               
+                likeCount = parseInt(likeCount);
+            }
+        
+            likeCount++;
+            localStorage.setItem(`likeCount_${blogId}`, likeCount);
+            document.getElementById(`likeCount_${blogId}`).innerText = likeCount;
+        
+            console.log(`Updated likeCount_${blogId} in local storage: ${likeCount}`);
+        }
+        
+        
+        
+
+        // Function to add a comment
+        function addComment(blogId) {
+            const comment = document.getElementById(`comment_${blogId}`).value;
+            if (comment.trim() !== "") {
+                const comments = JSON.parse(localStorage.getItem(`comments_${blogId}`)) || [];
+                comments.push(comment);
+                localStorage.setItem(`comments_${blogId}`, JSON.stringify(comments));
+                displayComments(blogId);
+                document.getElementById(`comment_${blogId}`).value = "";
+            }
+        }
+         // Function to delete a comment
+    function deleteComment(blogId, commentIndex) {
+        let comments = JSON.parse(localStorage.getItem(`comments_${blogId}`)) || [];
+        if (commentIndex >= 0 && commentIndex < comments.length) {
+            comments.splice(commentIndex, 1);
+            localStorage.setItem(`comments_${blogId}`, JSON.stringify(comments));
+            displayComments(blogId);
+        }
+    }
+
+    function displayComments(blogId) {
+        const comments = JSON.parse(localStorage.getItem(`comments_${blogId}`)) || [];
+        const commentsContainer = document.getElementById(`comments_${blogId}`);
+        commentsContainer.innerHTML = "";
+        
+        comments.forEach((comment, index) => {
+            const commentElement = document.createElement("div");
+            commentElement.innerText = comment;
+    
+            const deleteButton = document.createElement("button");
+            deleteButton.innerText = "Delete";
+            deleteButton.onclick = () => {
+                console.log(`Deleting comment at index ${index} for blog ${blogId}`);
+                deleteComment(blogId, index);
+            };
+    
+            commentElement.appendChild(deleteButton);
+            commentsContainer.appendChild(commentElement);
+        });
+    
+        console.log(`Displaying comments for blog ${blogId}`, comments);
+    }
+    
+
+        // Call displayComments for each blog when the page loads
+        document.addEventListener("DOMContentLoaded", () => {
+            displayComments("blog1");
+            displayComments("blog2");
+
+            // Update like counts on page load
+            document.getElementById('likeCount_blog1').innerText = localStorage.getItem('likeCount_blog1') || 0;
+            document.getElementById('likeCount_blog2').innerText = localStorage.getItem('likeCount_blog2') || 0;
+        });
+        
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to My Simple Blog</h1>
+    </header>
+
+    
+    <article class="blog" id="blog1">
+        <h2>Blog- 1</h2>
+        <article class="design">
+            <h2>The Beauty of Nature</h2>
+            <p>
+                Nature has a way of captivating our senses and soothing our souls. From the gentle rustle of leaves
+                in the breeze to the vibrant colors of a sunset, every aspect of the natural world is a masterpiece.
+                Nature has a way to heal you.
+            </p>
+            <p>
+                Take a moment to pause and appreciate the beauty around you. Whether it's a serene landscape, a
+                blooming flower, or the sound of birdsong, nature has a magical way of inspiring and refreshing us.
+            </p>
+        </article>
+    
+        <div class="interaction-container">
+            <button onclick="likeBlog('blog1')">Like</button>
+            <span class="like-count" id="likeCount_blog1">0</span> Likes
+            <hr />
+            <h3>Comments</h3>
+            <textarea id="comment_blog1" placeholder="Leave a comment"></textarea>
+            <button onclick="addComment('blog1')">Add Comment</button>
+            <div class="comments" id="comments_blog1"></div>
+        </div>
+    </article>
+
+    <!-- <article class="blog" id="blog2">
+        <h2>Blog-2</h2>
+        <article>
+            <h2>Sports: A Celebration of Passion and Skill</h2>
+            <p>
+                Sports are more than just games; they are a celebration of human potential and the thrill of competition.
+                Whether it's the speed of a sprinter, the precision of a basketball shot, or the teamwork on a soccer field,
+                sports showcase the incredible capabilities of the human body and mind.
+                    
+            </p>
+            <p>
+                Engaging in sports goes beyond physical fitness; it's a character-building experience. Athletes learn
+            discipline, resilience, and the importance of teamwork. The camaraderie developed on the field often
+            extends to lifelong friendships, teaching valuable life lessons that go beyond the game
+            </p>
+        </article>
+        <div class="interaction-container">
+            <button onclick="likeBlog('blog2')">Like</button>
+            <span class="like-count" id="likeCount_blog2">0</span> Likes
+            <hr />
+            <h3>Comments</h3>
+            <textarea id="comment_blog2" placeholder="Leave a comment"></textarea>
+            <button onclick="addComment('blog2')">Add Comment</button>
+            <div class="comments" id="comments_blog2"></div>
+        </div>
+    </article> -->
+
+</body>
+
+</html>
