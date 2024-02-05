@@ -274,6 +274,41 @@ body {
   margin-top: 15px;
   display: inline-block;
 }
+/* Right part style */
+.right-part {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Sliding images style */
+.sliding-images {
+  display: flex;
+ 
+  animation: slideImages 13s linear infinite;
+}
+
+@keyframes slideImages {
+  0% {
+      transform: translateX(0%);
+  }
+
+  100% {
+      transform: translateX(-100%);
+  }
+}
+
+/* Individual image style */
+.sliding-images img {
+ 
+  width: 20%;
+  border: 2px solid #1befc5; /* Set the border width and color */
+  border-radius: 20px; /* Optional: Add border-radius for rounded corners */
+  box-shadow: 0 0 5px #0ef, 0 0 10px #0ef; 
+  object-fit: cover;
+  margin-right: 10px;
+}
 
 .read {
   display: inline-block;
@@ -382,78 +417,79 @@ section {
     }
     
   .header {
-    padding: 15px 5%; /* Adjusted padding for smaller screens */
+    padding: 10px 5%; /* Adjusted padding for smaller screens */
   }
 
   .logo {
-    font-size: 20px; /* Adjusted font size for smaller screens */
+    font-size: 15px; /* Adjusted font size for smaller screens */
   }
 
   .design_nav a {
-    font-size: 16px; /* Adjusted font size for smaller screens */
-    margin: 8px 0; /* Adjusted margin for smaller screens */
+    font-size: 12px; /* Adjusted font size for smaller screens */
+    margin: 8px 0; 
   }
 
   .container1 {
-    margin-top: 10px; /* Adjusted margin for smaller screens */
+    margin-top: 5px; 
   }
 
   .container2 {
-    padding: 15px; /* Adjusted padding for smaller screens */
+    padding: 15px; 
     text-align: center;
   }
 
   .container2 h1 {
-    font-size: 28px; /* Adjusted font size for smaller screens */
+    font-size: 28px; 
   }
 
   .container3 a {
-    width: 20px; /* Adjusted width for smaller screens */
-    height: 20px; /* Adjusted height for smaller screens */
-    font-size: 10px; /* Adjusted font size for smaller screens */
-    margin: 10px 5px 10px 0; /* Adjusted margin for smaller screens */
+    width: 20px; 
+    height: 20px; 
+    font-size: 10px; 
+    margin: 10px 5px 10px 0; 
+    margin-top: 1vh;
   }
 
   .container4 {
-    padding: 15px; /* Adjusted padding for smaller screens */
+    padding: 15px; 
   }
 
   .educ-list div {
-    padding: 10px; /* Adjusted padding for smaller screens */
-    font-size: 8px; /* Adjusted font size for smaller screens */
+    padding: 10px; 
+    font-size: 8px; 
   }
 
   .read,
   .btn-box {
-    font-size: 10px; /* Adjusted font size for smaller screens */
-    padding: 6px 14px; /* Adjusted padding for smaller screens */
+    font-size: 10px; 
+    padding: 6px 14px; 
   }
 
   .container5 {
-    padding: 30px 5%; /* Adjusted padding for smaller screens */
+    padding: 30px 5%; 
   }
 
   .bar {
-    font-size: 14px; /* Adjusted font size for smaller screens */
-    margin-top: 8px; /* Adjusted margin for smaller screens */
+    font-size: 14px; 
+    margin-top: 8px; 
   }
 
   .last-text p {
-    font-size: 12px; /* Adjusted font size for smaller screens */
+    font-size: 12px; 
   }
 
   .top i {
-    font-size: 16px; /* Adjusted font size for smaller screens */
-    padding: 4px; /* Adjusted padding for smaller screens */
+    font-size: 16px; 
+    padding: 4px; 
   }
 
   .container6 .heading1 {
-    margin-top: 20px; /* Adjusted margin for smaller screens */
+    margin-top: 20px; 
   }
 
   .container6 p {
-    font-size: 14px; /* Adjusted font size for smaller screens */
-    margin-top: 10px; /* Adjusted margin for smaller screens */
+    font-size: 14px; 
+    margin-top: 10px; 
   }
 }
 

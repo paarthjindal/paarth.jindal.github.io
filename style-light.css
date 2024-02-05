@@ -274,6 +274,39 @@ body {
   margin-top: 15px;
   display: inline-block;
 }
+/* Right part style */
+.right-part {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Sliding images style */
+.sliding-images {
+  display: flex;
+  animation: slideImages 13s  linear infinite;
+}
+
+@keyframes slideImages {
+  0% {
+      transform: translateX(0%);
+  }
+
+  100% {
+      transform: translateX(-100%);
+  }
+}
+
+/* Individual image style */
+.sliding-images img {
+  width: 20%;
+  border: 2px solid #1befc5; /* Set the border width and color */
+  border-radius: 20px; /* Optional: Add border-radius for rounded corners */
+  box-shadow: 0 0 5px #0ef, 0 0 10px #0ef; 
+  object-fit: cover;
+  margin-right: 10px;
+}
 
 .read {
   display: inline-block;
@@ -382,20 +415,20 @@ section {
     }
     
   .header {
-    padding: 15px 5%; /* Adjusted padding for smaller screens */
+    padding: 10px 5%; /* Adjusted padding for smaller screens */
   }
 
   .logo {
-    font-size: 20px; /* Adjusted font size for smaller screens */
+    font-size: 15px; /* Adjusted font size for smaller screens */
   }
 
   .design_nav a {
-    font-size: 16px; /* Adjusted font size for smaller screens */
+    font-size: 12px; /* Adjusted font size for smaller screens */
     margin: 8px 0; /* Adjusted margin for smaller screens */
   }
 
   .container1 {
-    margin-top: 10px; /* Adjusted margin for smaller screens */
+    margin-top: 5px; /* Adjusted margin for smaller screens */
   }
 
   .container2 {
