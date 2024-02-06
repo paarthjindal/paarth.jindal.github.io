@@ -20,7 +20,7 @@
         }
 
         .blog {
-            
+
             padding: 20px;
             margin-bottom: 20px;
             border-radius: 8px;
@@ -44,12 +44,14 @@
             border-radius: 4px;
             cursor: pointer;
         }
-        .design{
+
+        .design {
             transition: 0.5s ease;
             opacity: 0;
             animation: slideLeft 1s ease forwards;
             animation-delay: 0.6s;
         }
+
         button:hover {
             background-color: #297fb8;
         }
@@ -61,13 +63,16 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
-        header h1{
+
+        header h1 {
             opacity: 0;
             animation: slideTop 0.5s ease forwards;
             animation-delay: 0.2s;
 
         }
+
         @media only screen and (max-width: 600px) {
+
             /* Adjust styling for smaller screens */
             .blog {
                 padding: 10px;
@@ -79,83 +84,88 @@
         }
 
         .comments div {
-            
+
             padding: 8px;
             margin-bottom: 8px;
             border-radius: 4px;
         }
+
         @keyframes slideRight {
             0% {
-              transform: translateX(-100px);
-              opacity: 0;
+                transform: translateX(-100px);
+                opacity: 0;
             }
+
             100% {
-              transform: translateX(0px);
-              opacity: 1;
+                transform: translateX(0px);
+                opacity: 1;
             }
-          }
-          
-          @keyframes slideTop {
+        }
+
+        @keyframes slideTop {
             0% {
-              transform: translateY(100px);
-              opacity: 0;
+                transform: translateY(100px);
+                opacity: 0;
             }
+
             100% {
-              transform: translateY(0px);
-              opacity: 1;
+                transform: translateY(0px);
+                opacity: 1;
             }
-          }
-          
-          @keyframes slideBottom {
+        }
+
+        @keyframes slideBottom {
             0% {
-              transform: translateY(-100px);
-              opacity: 0;
+                transform: translateY(-100px);
+                opacity: 0;
             }
+
             100% {
-              transform: translateY(0px);
-              opacity: 1;
+                transform: translateY(0px);
+                opacity: 1;
             }
-          }
-          
-          @keyframes slideLeft {
+        }
+
+        @keyframes slideLeft {
             0% {
-              transform: translateX(100px);
-              opacity: 0;
+                transform: translateX(100px);
+                opacity: 0;
             }
+
             100% {
-              transform: translateX(0px);
-              opacity: 1;
+                transform: translateX(0px);
+                opacity: 1;
             }
-          }
+        }
     </style>
     <title>Blog Section 1</title>
     <script>
-        // Function to handle like button click
+
         function likeBlog(blogId) {
             let likeCount = localStorage.getItem(`likeCount_${blogId}`);
-        
+
             console.log(`Current likeCount_${blogId} in local storage: ${likeCount}`);
-        
-            
+
+
             if (likeCount === null || isNaN(likeCount)) {
-               
+
                 likeCount = 0;
             } else {
-               
+
                 likeCount = parseInt(likeCount);
             }
-        
+
             likeCount++;
             localStorage.setItem(`likeCount_${blogId}`, likeCount);
             document.getElementById(`likeCount_${blogId}`).innerText = likeCount;
-        
+
             console.log(`Updated likeCount_${blogId} in local storage: ${likeCount}`);
         }
-        
-        
-        
 
-        // Function to add a comment
+
+
+
+
         function addComment(blogId) {
             const comment = document.getElementById(`comment_${blogId}`).value;
             if (comment.trim() !== "") {
@@ -166,39 +176,39 @@
                 document.getElementById(`comment_${blogId}`).value = "";
             }
         }
-         // Function to delete a comment
-    function deleteComment(blogId, commentIndex) {
-        let comments = JSON.parse(localStorage.getItem(`comments_${blogId}`)) || [];
-        if (commentIndex >= 0 && commentIndex < comments.length) {
-            comments.splice(commentIndex, 1);
-            localStorage.setItem(`comments_${blogId}`, JSON.stringify(comments));
-            displayComments(blogId);
-        }
-    }
 
-    function displayComments(blogId) {
-        const comments = JSON.parse(localStorage.getItem(`comments_${blogId}`)) || [];
-        const commentsContainer = document.getElementById(`comments_${blogId}`);
-        commentsContainer.innerHTML = "";
-        
-        comments.forEach((comment, index) => {
-            const commentElement = document.createElement("div");
-            commentElement.innerText = comment;
-    
-            const deleteButton = document.createElement("button");
-            deleteButton.innerText = "Delete";
-            deleteButton.onclick = () => {
-                console.log(`Deleting comment at index ${index} for blog ${blogId}`);
-                deleteComment(blogId, index);
-            };
-    
-            commentElement.appendChild(deleteButton);
-            commentsContainer.appendChild(commentElement);
-        });
-    
-        console.log(`Displaying comments for blog ${blogId}`, comments);
-    }
-    
+        function deleteComment(blogId, commentIndex) {
+            let comments = JSON.parse(localStorage.getItem(`comments_${blogId}`)) || [];
+            if (commentIndex >= 0 && commentIndex < comments.length) {
+                comments.splice(commentIndex, 1);
+                localStorage.setItem(`comments_${blogId}`, JSON.stringify(comments));
+                displayComments(blogId);
+            }
+        }
+
+        function displayComments(blogId) {
+            const comments = JSON.parse(localStorage.getItem(`comments_${blogId}`)) || [];
+            const commentsContainer = document.getElementById(`comments_${blogId}`);
+            commentsContainer.innerHTML = "";
+
+            comments.forEach((comment, index) => {
+                const commentElement = document.createElement("div");
+                commentElement.innerText = comment;
+
+                const deleteButton = document.createElement("button");
+                deleteButton.innerText = "Delete";
+                deleteButton.onclick = () => {
+                    console.log(`Deleting comment at index ${index} for blog ${blogId}`);
+                    deleteComment(blogId, index);
+                };
+
+                commentElement.appendChild(deleteButton);
+                commentsContainer.appendChild(commentElement);
+            });
+
+            console.log(`Displaying comments for blog ${blogId}`, comments);
+        }
+
 
         // Call displayComments for each blog when the page loads
         document.addEventListener("DOMContentLoaded", () => {
@@ -209,31 +219,48 @@
             document.getElementById('likeCount_blog1').innerText = localStorage.getItem('likeCount_blog1') || 0;
             document.getElementById('likeCount_blog2').innerText = localStorage.getItem('likeCount_blog2') || 0;
         });
-        
+
     </script>
 </head>
 
 <body>
     <header>
-        <h1>Welcome to My Simple Blog</h1>
+        <h1>Welcome to My Blog</h1>
     </header>
 
-    
+
     <article class="blog" id="blog1">
         <h2>Blog- 1</h2>
         <article class="design">
             <h2>The Beauty of Nature</h2>
+            <h3>A Journey Into Nature's Embrace
+
+            </h3>
+            <p>In the hustle and bustle of our daily lives, the essence of nature often serves as a tranquil refuge.
+                "The Beauty of Nature" blog delves into the profound impact of nature on our senses and well-being.</p>
             <p>
                 Nature has a way of captivating our senses and soothing our souls. From the gentle rustle of leaves
                 in the breeze to the vibrant colors of a sunset, every aspect of the natural world is a masterpiece.
                 Nature has a way to heal you.
             </p>
+            <h3>Connecting with the Symphony of Nature:</h3>
+            <p>Nature's symphony, from the gentle rustle of leaves to the harmonious chirping of birds, creates a
+                soothing melody that resonates with our souls. These subtle sounds form a therapeutic background,
+                inviting us to escape momentarily from the chaos of our hectic lives</p>
+            <h3>Healing Powers of Nature:</h3>
+            <p>Beyond aesthetics, nature possesses a unique ability to heal. Whether it's a stroll through a vibrant
+                garden or a moment of contemplation by a serene lake, nature rejuvenates our spirits. This blog invites
+                readers to embrace the therapeutic embrace of the natural world.</p>
+            <h3>Invitation to Pause and Appreciate:</h3>
+            <p>Encouraging readers to pause and appreciate the beauty that surrounds them, the blog emphasizes the
+                transformative impact of simple moments in nature. Be it the awe-inspiring grandeur of a mountain range
+                or the delicate intricacy of a spider's web, each detail invites reflection and gratitude.</p>
             <p>
                 Take a moment to pause and appreciate the beauty around you. Whether it's a serene landscape, a
                 blooming flower, or the sound of birdsong, nature has a magical way of inspiring and refreshing us.
             </p>
         </article>
-    
+
         <div class="interaction-container">
             <button onclick="likeBlog('blog1')">Like</button>
             <span class="like-count" id="likeCount_blog1">0</span> Likes

@@ -20,7 +20,7 @@
         }
 
         .blog {
-            
+
             padding: 20px;
             margin-bottom: 20px;
             border-radius: 8px;
@@ -56,19 +56,23 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
-        header h1{
+
+        header h1 {
             opacity: 0;
             animation: slideTop 0.5s ease forwards;
             animation-delay: 0.2s;
 
         }
-        .design{
+
+        .design {
             transition: 0.5s ease;
             opacity: 0;
             animation: slideLeft 1s ease forwards;
             animation-delay: 0.6s;
         }
+
         @media only screen and (max-width: 600px) {
+
             /* Adjust styling for smaller screens */
             .blog {
                 padding: 10px;
@@ -80,63 +84,68 @@
         }
 
         .comments div {
-            
+
             padding: 8px;
             margin-bottom: 8px;
             border-radius: 4px;
         }
+
         @keyframes slideRight {
             0% {
-              transform: translateX(-100px);
-              opacity: 0;
+                transform: translateX(-100px);
+                opacity: 0;
             }
+
             100% {
-              transform: translateX(0px);
-              opacity: 1;
+                transform: translateX(0px);
+                opacity: 1;
             }
-          }
-          
-          @keyframes slideTop {
+        }
+
+        @keyframes slideTop {
             0% {
-              transform: translateY(100px);
-              opacity: 0;
+                transform: translateY(100px);
+                opacity: 0;
             }
+
             100% {
-              transform: translateY(0px);
-              opacity: 1;
+                transform: translateY(0px);
+                opacity: 1;
             }
-          }
-          
-          @keyframes slideBottom {
+        }
+
+        @keyframes slideBottom {
             0% {
-              transform: translateY(-100px);
-              opacity: 0;
+                transform: translateY(-100px);
+                opacity: 0;
             }
+
             100% {
-              transform: translateY(0px);
-              opacity: 1;
+                transform: translateY(0px);
+                opacity: 1;
             }
-          }
-          
-          @keyframes slideLeft {
+        }
+
+        @keyframes slideLeft {
             0% {
-              transform: translateX(100px);
-              opacity: 0;
+                transform: translateX(100px);
+                opacity: 0;
             }
+
             100% {
-              transform: translateX(0px);
-              opacity: 1;
+                transform: translateX(0px);
+                opacity: 1;
             }
-          }
+        }
     </style>
-    <title>Blog Section  2</title>
+    <title>Blog Section 2</title>
     <script>
         // Function to handle like button click
         function likeBlog(blogId) {
             let likeCount = localStorage.getItem(`likeCount_${blogId}`);
-        
+
             console.log(`Current likeCount_${blogId} in local storage: ${likeCount}`);
-        
+
             // Check if likeCount is present in local storage
             if (likeCount === null || isNaN(likeCount)) {
                 // If not present or not a valid number, initialize likeCount to 0
@@ -145,14 +154,14 @@
                 // Parse the likeCount from local storage
                 likeCount = parseInt(likeCount);
             }
-        
+
             likeCount++;
             localStorage.setItem(`likeCount_${blogId}`, likeCount);
             document.getElementById(`likeCount_${blogId}`).innerText = likeCount;
-        
+
             console.log(`Updated likeCount_${blogId} in local storage: ${likeCount}`);
         }
-        
+
 
         // Function to add a comment
         function addComment(blogId) {
@@ -165,61 +174,61 @@
                 document.getElementById(`comment_${blogId}`).value = "";
             }
         }
-         // Function to delete a comment
-    function deleteComment(blogId, commentIndex) {
-        let comments = JSON.parse(localStorage.getItem(`comments_${blogId}`)) || [];
-        if (commentIndex >= 0 && commentIndex < comments.length) {
-            comments.splice(commentIndex, 1);
-            localStorage.setItem(`comments_${blogId}`, JSON.stringify(comments));
-            displayComments(blogId);
+        // Function to delete a comment
+        function deleteComment(blogId, commentIndex) {
+            let comments = JSON.parse(localStorage.getItem(`comments_${blogId}`)) || [];
+            if (commentIndex >= 0 && commentIndex < comments.length) {
+                comments.splice(commentIndex, 1);
+                localStorage.setItem(`comments_${blogId}`, JSON.stringify(comments));
+                displayComments(blogId);
+            }
         }
-    }
 
-    function displayComments(blogId) {
-        const comments = JSON.parse(localStorage.getItem(`comments_${blogId}`)) || [];
-        const commentsContainer = document.getElementById(`comments_${blogId}`);
-        commentsContainer.innerHTML = "";
-        
-        comments.forEach((comment, index) => {
-            const commentElement = document.createElement("div");
-            commentElement.innerText = comment;
-    
-            const deleteButton = document.createElement("button");
-            deleteButton.innerText = "Delete";
-            deleteButton.onclick = () => {
-                console.log(`Deleting comment at index ${index} for blog ${blogId}`);
-                deleteComment(blogId, index);
-            };
-    
-            commentElement.appendChild(deleteButton);
-            commentsContainer.appendChild(commentElement);
-        });
-    
-        console.log(`Displaying comments for blog ${blogId}`, comments);
-    }
-    
- 
-        
+        function displayComments(blogId) {
+            const comments = JSON.parse(localStorage.getItem(`comments_${blogId}`)) || [];
+            const commentsContainer = document.getElementById(`comments_${blogId}`);
+            commentsContainer.innerHTML = "";
+
+            comments.forEach((comment, index) => {
+                const commentElement = document.createElement("div");
+                commentElement.innerText = comment;
+
+                const deleteButton = document.createElement("button");
+                deleteButton.innerText = "Delete";
+                deleteButton.onclick = () => {
+                    console.log(`Deleting comment at index ${index} for blog ${blogId}`);
+                    deleteComment(blogId, index);
+                };
+
+                commentElement.appendChild(deleteButton);
+                commentsContainer.appendChild(commentElement);
+            });
+
+            console.log(`Displaying comments for blog ${blogId}`, comments);
+        }
+
+
+
         document.addEventListener("DOMContentLoaded", () => {
-    displayComments("blog1");
-    displayComments("blog2");
+            displayComments("blog1");
+            displayComments("blog2");
 
-    // Update like counts on page load
-    const likeCountBlog1 = localStorage.getItem('likeCount_blog1');
-    const likeCountBlog2 = localStorage.getItem('likeCount_blog2');
+            // Update like counts on page load
+            const likeCountBlog1 = localStorage.getItem('likeCount_blog1');
+            const likeCountBlog2 = localStorage.getItem('likeCount_blog2');
 
-    document.getElementById('likeCount_blog1').innerText = likeCountBlog1 !== null ? likeCountBlog1 : 0;
-    document.getElementById('likeCount_blog2').innerText = likeCountBlog2 !== null ? likeCountBlog2 : 0;
-});
+            document.getElementById('likeCount_blog1').innerText = likeCountBlog1 !== null ? likeCountBlog1 : 0;
+            document.getElementById('likeCount_blog2').innerText = likeCountBlog2 !== null ? likeCountBlog2 : 0;
+        });
     </script>
 </head>
 
 <body>
     <header>
-        <h1>Welcome to My Simple Blog</h1>
+        <h1>Welcome to My  Blog</h1>
     </header>
 
-    
+
     <!-- <article class="blog" id="blog1">
         <h2>Blog- 1</h2>
         <article>
@@ -251,15 +260,35 @@
         <article class="design">
             <h2>Sports: A Celebration of Passion and Skill</h2>
             <p>
-                Sports are more than just games; they are a celebration of human potential and the thrill of competition.
-                Whether it's the speed of a sprinter, the precision of a basketball shot, or the teamwork on a soccer field,
+                Sports are more than just games; they are a celebration of human potential and the thrill of
+                competition.
+                Whether it's the speed of a sprinter, the precision of a basketball shot, or the teamwork on a soccer
+                field,
                 sports showcase the incredible capabilities of the human body and mind.
-                    
+
             </p>
+
+            <h3>Character-Building Experience:</h3>
+            <p>Beyond physical fitness, the author argues that engaging in sports contributes significantly to character
+                development. Athletes are said to learn essential values such as discipline, resilience, and the
+                significance of teamwork. This implies that the benefits of participating in sports extend beyond the
+                immediate physical benefits, shaping individuals into well-rounded and disciplined individuals.
+
+            </p>
+            <h3>Camaraderie and Lifelong Friendships:</h3>
+            <p>The blog suggests that the camaraderie developed on the sports field is not only integral to the game but
+                also extends into lasting friendships. This aspect emphasizes the social and relational aspects of
+                sports, portraying them as a means to forge connections and teach valuable life lessons that endure
+                beyond the confines of the game</p>
+            <h3>Life Lessons Beyond the Game:</h3>
+            <p>The author contends that the lessons learned through sports are not confined to the playing field.
+                Instead, they have a broader applicability to life, suggesting that the skills and values acquired in
+                the realm of sports have a positive impact on various aspects of an individual's personal and
+                professional life</p>
             <p>
                 Engaging in sports goes beyond physical fitness; it's a character-building experience. Athletes learn
-            discipline, resilience, and the importance of teamwork. The camaraderie developed on the field often
-            extends to lifelong friendships, teaching valuable life lessons that go beyond the game
+                discipline, resilience, and the importance of teamwork. The camaraderie developed on the field often
+                extends to lifelong friendships, teaching valuable life lessons that go beyond the game
             </p>
         </article>
         <div class="interaction-container">
